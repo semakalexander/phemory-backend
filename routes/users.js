@@ -1,10 +1,12 @@
 const express = require("express");
 
+const passport = require("passport")
+
 const userController = require("../controllers").users;
 
 const router = express.Router();
 
-router.get("/", userController.getUsers);
+router.get("/", passport.authenticate('bearer', { session: false }), userController.getUsers);
 
 router.post("/", userController.createUser);
 

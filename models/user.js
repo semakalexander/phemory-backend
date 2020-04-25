@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const { Schema, ObjectId } = mongoose
+const { Schema } = mongoose
 
 const schema = new Schema(
   {
@@ -11,11 +11,20 @@ const schema = new Schema(
     avatar: { type: String },
     birthday: { type: Date },
     createdAt: { type: Date, default: Date.now() },
-    cameras: [{ type: ObjectId, ref: 'Camera', required: true, default: [] }],
     token: String // Bearer
   },
   { versionKey: false }
 )
+
+schema.method('toClient', function () {
+  var obj = this.toObject()
+
+  // Rename fields
+  obj.id = obj._id
+  delete obj._id
+
+  return obj
+})
 
 let User
 

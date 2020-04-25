@@ -2,24 +2,14 @@ const Express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const passport = require('passport')
-const BearerStrategy = require('passport-http-bearer').Strategy
 const cors = require('cors')
 
 const keys = require('./keys')
 const routes = require('./routes/index')
 
-const User = require('./models/user')
+const helpers = require('./helpers')
 
-passport.use(new BearerStrategy(
-  async (token, done) => {
-    try {
-      const user = await User.findOne({ token })
-      return done(null, user)
-    } catch (error) {
-      return done(error)
-    }
-  }
-))
+passport.use(helpers.jwt.bearerStrategy)
 
 mongoose
   .connect(keys.dbUri, { useNewUrlParser: true, useUnifiedTopology: true })

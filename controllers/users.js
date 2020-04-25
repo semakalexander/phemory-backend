@@ -15,7 +15,7 @@ const getUsers = (req, res) => {
   if (!sortBy) sortBy = 'username'
 
   Promise.all([
-    User.count(),
+    User.countDocuments(),
     User.find()
       .skip(page * perPage)
       .limit(+perPage)
