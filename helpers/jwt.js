@@ -1,15 +1,13 @@
 const jwt = require('jsonwebtoken')
 const BearerStrategy = require('passport-http-bearer').Strategy
 
-const keys = require('../keys')
-
 const User = require('../models/user')
 
-const sign = data => jwt.sign({ data }, keys.JWT_SECRET, { expiresIn: '24h' })
+const sign = data => jwt.sign({ data }, process.env.JWT_SECRET, { expiresIn: '24h' })
 
 const verify = token => {
   try {
-    return jwt.verify(token, keys.JWT_SECRET)
+    return jwt.verify(token, process.env.JWT_SECRET)
   } catch (error) {
     return { error }
   }

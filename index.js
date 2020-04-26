@@ -1,10 +1,13 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load()
+}
+
 const Express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const passport = require('passport')
 const cors = require('cors')
 
-const keys = require('./keys')
 const routes = require('./routes/index')
 
 const helpers = require('./helpers')
@@ -12,7 +15,7 @@ const helpers = require('./helpers')
 passport.use(helpers.jwt.bearerStrategy)
 
 mongoose
-  .connect(keys.dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongodDB is connected'))
   .catch((err) => console.error(err))
 mongoose.set('useCreateIndex', true)
