@@ -1,5 +1,5 @@
 const helpers = require('../helpers')
-const User = require('../models/User')
+const User = require('../models/user')
 
 // @route  api/users
 // @desc   get all users
