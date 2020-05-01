@@ -1,13 +1,13 @@
-const express = require("express");
+const express = require('express')
 
-const passport = require("passport")
+const passport = require('passport')
 
-const userController = require("../controllers").users;
+const userController = require('../controllers').users
 
-const router = express.Router();
+const router = express.Router()
 
-router.get("/", passport.authenticate('bearer', { session: false }), userController.getUsers);
+router.get('/', passport.authenticate('bearer', { session: false }), userController.getUsers)
 
-router.post("/", userController.createUser);
+router.post('/', userController.createUser)
 
-module.exports = router;
+module.exports = router

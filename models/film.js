@@ -5,7 +5,7 @@ const { Schema } = mongoose
 const schema = new Schema(
   {
     name: { type: String, required: true },
-    iso: { type: Number, required: true },
+    iso: { type: Number, required: false },
     image: { type: String },
     lensId: { type: String, ref: 'Lens', required: true },
     createdAt: { type: Date, default: Date.now() }
